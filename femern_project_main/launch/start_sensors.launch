@@ -6,6 +6,7 @@
     <include file="$(find realsense2_camera)/launch/rs_camera.launch" />
     <include file="$(find sick_scan)/launch/sick_mrs_1xxx.launch">
         <arg name="hostname" value="192.168.131.10" />
+        <arg name="frame_id" value="LiDAR_frame" />
     </include>
 
 </launch>
