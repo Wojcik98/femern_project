@@ -1,3 +1,11 @@
 <launch>
+    <include file="$(find galirumi_localization)/launch/ekf_gnss.launch" />
+    <include file="$(find galirumi_localization)/launch/navsat_transform_egnss.launch" />
+    <include file="$(find glrmi_bringup)/launch/glrmi_dtu_bringup.launch" />
+
     <include file="$(find realsense2_camera)/launch/rs_camera.launch" />
+    <include file="$(find sick_scan)/launch/sick_mrs_1xxx.launch">
+        <arg name="hostname" value="192.168.131.10" />
+    </include>
+
 </launch>

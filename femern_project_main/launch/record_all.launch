@@ -1,0 +1,4 @@
+<launch>
+	<!-- Optional: "--split --duration=5m" -->
+	<node name="record_bag" pkg="rosbag" type="record" args="--all --output-prefix=/home/administrator/femern_bags_1022" />
+</launch>
