@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import rospy
-from sensor_msgs.msg import Image
+from sensor_msgs.msg import Image, NavSatFix
 
 class RosNode:
     def __init__(self):
@@ -12,21 +12,24 @@ class RosNode:
         TODO: save coordinates of pothole location
         
         """
-        rospy.init_node("pothole_detection")
-        # rospy.loginfo("Starting RosNode.")
+        rospy.init_node("pothole_detection_node")
+        rospy.loginfo("Starting RosNode...")
+
+        self.RosInterfaces()
         
-        self.rate = rospy.Rate(2)
-        self.get_single_image()
+        self.rate = rospy.Rate(5)
+        rospy.loginfo("pothole deterctor started correctly")
+        # self.get_single_image()
 
     def RosInterfaces(self):
-        sub = rospy.Subscriber("/fix", Image, self.localization_cb)
-        sub = rospy.Subscriber("/fix", Image, self.image_depth_cb)
+        rospy.Subscriber("/fix", NavSatFix, self.localization_cb)
+        rospy.Subscriber("/camera/depth/image_rect_raw", Image, self.image_depth_cb)
     
-    def image_raw_cb(self, image_msg_):
+    def localization_cb(self, navSatFix_msg_:NavSatFix):
+        rospy.loginfo_throttle(1, f"localization: {round(navSatFix_msg_.latitude,4)},{round(navSatFix_msg_.longitude,4)}")
+
+    def image_depth_cb(self, image_msg_):
         pass
-    
-    def main_loop(self):
-        self.rate.sleep()
 
 
 ros_node = RosNode()

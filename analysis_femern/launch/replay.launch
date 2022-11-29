@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="bagfile"/>
+    <arg name="bagFile_directory" default="$(find analysis_femern)/bags/$(arg bagfile)"/>
+    <arg name="rviz" default="true"/>
+    <arg name="just_video" default="true"/>
+
+    <arg name="start_time" value="35" doc="time in seconds"/>
+    <arg name="duration" value="20"  doc="time in seconds"/>
+
+    <arg if="$(eval just_video == false)" name="rviz_config" value="config.rviz"/>
+    <arg if="$(eval just_video == true)" name="rviz_config" value="just_video.rviz"/>
+
+
+    <!-- normal replay -->
+    <group if="$(eval just_video == false)">
+        <node 
+            pkg="rosbag" type="play" name="player" output="screen"
+            args="--clock -l --start $(arg start_time) --duration=$(arg duration) $(arg bagFile_directory)"
+            >
+        </node>
+    </group>
+
+    <!-- just video replay for pothole time annotation -->
+    <group if="$(eval just_video == true)">
+        <node 
+            pkg="rosbag" type="play" name="player" output="screen"
+            args="--clock -l $(arg bagFile_directory)"
+            >
+        </node>
+    </group>
+
+    <!-- Rviz -->
+    <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" args="-d $(find femern_project_main)/config/$(arg rviz_config)" output="log"/>
+
+</launch>
