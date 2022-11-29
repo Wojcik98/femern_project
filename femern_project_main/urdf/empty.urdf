@@ -1,0 +1,585 @@
+<robot>
+  <!-- This file is a placeholder which is included by default from
+       husky.urdf.xacro. If a robot is being customized and requires
+       additional URDF, set the HUSKY_URDF_EXTRAS environment variable
+       to the full path of the file you would like included. -->
+   <link
+    name="Aluminum_frame_1">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0 0 0.3475"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.03 0.03 0.695"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.3475"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.03 0.03 0.695"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!--joint
+    name="ALuminum_1_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Aluminum_frame_1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint-->
+
+  <link
+    name="Aluminum_frame_2">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0 0 0.17"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.03 0.03 0.34"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.03 0.03 0.34"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Aluminum_2_joint"
+    type="fixed">
+    <origin
+      xyz="0.0 0 0.446"
+      rpy="0 0.7853975 0" />
+    <parent
+      link="Aluminum_frame_1" />
+    <child
+      link="Aluminum_frame_2" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+ <link
+    name="Aluminum_frame_3">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0 0 0.199"
+        rpy="0 1.570795 0" />
+      <geometry>
+        <box size="0.368 0.03 0.03"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.199"
+        rpy="0 1.570795 0" />
+      <geometry>
+        <box size="0.368 0.03 0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Aluminum_3_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0.68"
+      rpy="0 1.570795 0" />
+    <parent
+      link="Aluminum_frame_1" />
+    <child
+      link="Aluminum_frame_3" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+ <link
+    name="Aluminum_frame_4">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0.015 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.03 0.03"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0.015 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.03 0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Aluminum_4_joint"
+    type="fixed">
+    <origin
+      xyz="0.0 0 0.383"
+      rpy="0 -2.3561925 0" />
+    <parent
+      link="Aluminum_frame_3" />
+    <child
+      link="Aluminum_frame_4" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+ <link
+    name="camera_link">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0.015 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.09 0.025"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0.015 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.09 0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Aluminum_camera_joint"
+    type="fixed">
+    <origin
+        xyz="0.025 0 0"
+        rpy="0 0 0" />
+    <parent
+      link="Aluminum_frame_4" />
+    <child
+      link="camera_link" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+ <link
+    name="Aluminum_frame_5">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0.0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.03 0.03 0.163"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0.0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.025 0.09 0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="ALuminum_5_joint"
+    type="fixed">
+    <origin
+        xyz="0.0665 0 0.18844" 
+        rpy="0 1.570795 0" /><!--"0.18844 0 0.54039"-->
+    <parent
+      link="Aluminum_frame_2" />
+    <child
+      link="Aluminum_frame_5" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+ <link
+    name="Aluminum_frame_6">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.03 0.03 0.0515"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.03 0.03 0.0515"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Aluminum_6_joint"
+    type="fixed">
+    <origin
+      xyz="-0.01075 0 0.0815"
+      rpy="0 1.570795 0" />
+    <parent
+      link="Aluminum_frame_5" />
+    <child
+      link="Aluminum_frame_6" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+ <link
+    name="LiDAR_frame">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.15 0.04"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.15 0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Aluminum_LiDAR_joint"
+    type="fixed">
+    <origin
+      xyz="0.0 0 -0.04575"
+      rpy="0 0 0" />
+    <parent
+      link="Aluminum_frame_6" />
+    <child
+      link="LiDAR_frame" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+ <link
+    name="Aluminum_frame_7">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0 -0.035 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.03 0.07 0.03"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 -0.035 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.03 0.07 0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Aluminum_7_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0.165"
+      rpy="0 0 0" />
+    <parent
+      link="Aluminum_frame_3" />
+    <child
+      link="Aluminum_frame_7" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+ <link
+    name="gps_frame">
+    <!--inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="" />
+      <inertia
+        ixx="0.0741481702966839"
+        ixy="9.11690651727538E-09"
+        ixz="-0.000595973532321716"
+        iyy="0.133316902820744"
+        iyz="8.15215595203363E-10"
+        izz="0.134643218388428" />
+    </inertial-->
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.031" length="0.02"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.04 0.06 0.08"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Aluminum_gps_joint"
+    type="fixed">
+    <origin
+      xyz="-0.025 -0.07 0"
+      rpy="0 1.570795 0" />
+    <parent
+      link="Aluminum_frame_7" />
+    <child
+      link="gps_frame" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>

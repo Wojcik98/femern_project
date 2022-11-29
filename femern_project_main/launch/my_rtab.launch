@@ -1,0 +1,12 @@
+<launch>
+    <include file="$(find femern_project_main)/launch/rtabmap.launch">
+        <arg name="rtabmap_args" value="" />
+        <arg name="depth_topic" value="" />
+        <arg name="rgb_topic" value="" />
+        <arg name="camera_info_topic" value="" />
+        <arg name="approx_sync" value="" />
+        <arg name="visual_odometry" value="" />
+        <arg name="publish_tf_odom" value="false" />
+        <arg name="odom_topic" value="" />
+    </include>
+</launch>

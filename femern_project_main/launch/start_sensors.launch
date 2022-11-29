@@ -1,12 +1,18 @@
 <launch>
-    <include file="$(find galirumi_localization)/launch/ekf_gnss.launch" />
-    <include file="$(find galirumi_localization)/launch/navsat_transform_egnss.launch" />
-    <include file="$(find glrmi_bringup)/launch/glrmi_dtu_bringup.launch" />
+    <include file="/home/administrator/femern_ws/src/galirumi_localization/launch/ekf_gnss.launch" />
+    <include file="/home/administrator/femern_ws/src/galirumi_localization/launch/navsat_transform_egnss.launch" />
+    <!-- <include file="/home/administrator/femern_ws/src/glrmi_bringup/launch/glrmi_dtu_bringup.launch" /> -->
+    <!-- GPS -->
+    <node pkg="nmea_navsat_driver" type="nmea_serial_driver" name="gps_sensor" args="_port:=/dev/ttyACM0 _baud:=9600" />
+
+    <!-- IMU -->
+    <include file="$(find detection_sensor_bringup)/launch/xsens_mti_node.launch">
+    </include>
 
     <include file="$(find realsense2_camera)/launch/rs_camera.launch" />
     <include file="$(find sick_scan)/launch/sick_mrs_1xxx.launch">
         <arg name="hostname" value="192.168.131.10" />
         <arg name="frame_id" value="LiDAR_frame" />
     </include>
-
+    <!--include file="$(find femern_project_main)/launch/rtabmap.launch" /-->
 </launch>
