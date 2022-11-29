@@ -1,1 +1,7 @@
+# ide
+.vscode/
+
+
+# heavy bag files
+*.bag
 *.ply
