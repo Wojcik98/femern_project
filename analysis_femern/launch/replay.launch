@@ -4,7 +4,7 @@
     <arg name="bagFile_directory" default="$(find analysis_femern)/bags/$(arg rosbag)"/>
     <arg name="rviz" default="true"/>
     <arg name="just_video_pointcloud" default="true"/>
-    <arg name="replay_rate_factor" default="0.3"/>
+    <arg name="replay_rate_factor" default="0.1"/>
 
     <arg name="start_paused" default="true"/>
         <arg if="$(eval start_paused == true)" name="pause_arg" value="--pause"/>

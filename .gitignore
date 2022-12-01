@@ -5,3 +5,4 @@
 # heavy bag files
 *.bag
 *.ply
+*.pyc
