@@ -28,54 +28,27 @@ class CameraIntrinsics:
             [0, 0, 1]]
             )
 
-def detect_pothole(xyz):
-    plane_model, inliers = xyz.segment_plane(distance_threshold=0.1,
-                                             ransac_n=3,
-                                             num_iterations=100)
-    outlier_cloud = xyz.select_by_index(inliers, invert=True)
+def detect_pothole(pc_):
+    _f = 5
+    _ps = np.array([p for i, p in enumerate(point_cloud2.read_points(pc_, skip_nans=True)) if i%_f==0])
+        
+    _pc = o3d.geometry.PointCloud()
+    _pc.points = o3d.utility.Vector3dVector(_ps)
 
-    pc_np = np.asarray(outlier_cloud.points)
-    if not pc_np.size:
-        rospy.loginfo(f"pothole detected size: {pc_np.size}, {pc_np[:10]}")
+    _pc = _pc.voxel_down_sample(voxel_size=0.1)
+    pcd, _ = _pc.remove_statistical_outlier(nb_neighbors=10, std_ratio=1.0)
+
+    plane_model, inliers = pcd.segment_plane(distance_threshold=0.1,
+                                                ransac_n=3,
+                                                num_iterations=1000)
+    inlier_cloud = pcd.select_by_index(inliers)
+    outlier_cloud_10 = pcd.select_by_index(inliers, invert=True)
+
+    if l:=len(outlier_cloud_10.points) < 60:
+        rospy.loginfo(f"Dected pothole pointcount: {l}")
         return True
 
     return False
-
-def convert_depth_frame_to_pointcloud(depth_image, camera_intrinsics:CameraIntrinsics ):
-	"""
-	Convert the depthmap to a 3D point cloud
-	Parameters:
-	-----------
-	depth_frame 	 	 : rs.frame()
-						   The depth_frame containing the depth map
-	camera_intrinsics : The intrinsic values of the imager in whose coordinate system the depth_frame is computed
-	Return:
-	----------
-	x : array
-		The x values of the pointcloud in meters
-	y : array
-		The y values of the pointcloud in meters
-	z : array
-		The z values of the pointcloud in meters
-	"""
-	
-	[height, width] = depth_image.shape
-
-	nx = np.linspace(0, width-1, width)
-	ny = np.linspace(0, height-1, height)
-	u, v = np.meshgrid(nx, ny)
-	x = (u.flatten() - camera_intrinsics.ppx)/camera_intrinsics.fx
-	y = (v.flatten() - camera_intrinsics.ppy)/camera_intrinsics.fy
-
-	z = depth_image.flatten() / 1000
-	x = np.multiply(x,z)
-	y = np.multiply(y,z)
-
-	x = x[np.nonzero(z)]
-	y = y[np.nonzero(z)]
-	z = z[np.nonzero(z)]
-
-	return x, y, z
 
 BASE_PATH = "/home/ionybwr/DTU/robotics_construction/femern_ws/src/femern_project/analysis_femern/"
 class RosNode:
@@ -93,6 +66,7 @@ class RosNode:
 
         self.bridge = CvBridge()
         self.camera_instrinsics = CameraIntrinsics([387.3398132324219, 0.0, 319.65350341796875, 0.0, 387.3398132324219, 243.85708618164062, 0.0, 0.0, 1.0])
+        self.location_coords = (0,0)
         self.RosInterfaces()
         
         rospy.loginfo("pothole detector started correctly")
@@ -106,7 +80,8 @@ class RosNode:
         self.stop_service = rospy.Service('plot_pointcloud', Trigger, self.plot_pointcloud_service,)
     
     def localization_cb(self, navSatFix_msg_:NavSatFix):
-        # rospy.loginfo_throttle(1, f"localization: {round(navSatFix_msg_.latitude,4)},{round(navSatFix_msg_.longitude,4)}")
+        rospy.loginfo_throttle(1, f"localization: {round(navSatFix_msg_.latitude,4)},{round(navSatFix_msg_.longitude,4)}")
+        self.location_coords = (round(navSatFix_msg_.latitude,4), round(navSatFix_msg_.longitude,4))
         pass
 
     def depth_image_cb(self, img_msg_:Image):
@@ -130,9 +105,9 @@ class RosNode:
         pcd_.points = o3d.utility.Vector3dVector(ps)
 
         start_ = time.time()
-        if detect_pothole(pcd_):
-            self.save_pointcloud_plot(pc_=pc_, fname_=f'pc_{datetime.now().time()}')
-            rospy.logwarn(f"Pothole detected. Time elapsed: {time.time()-start_}")
+        if detect_pothole(pc_):
+            # self.save_pointcloud_plot(pc_=pc_, fname_=f'pc_{datetime.now().time()}')
+            rospy.logwarn(f"Pothole detected in location {self.location_coords}. Time elapsed: {time.time()-start_}")
 
     def save_pointcloud_plot(self, pc_:PointCloud2, fname_:str):
         """
@@ -176,18 +151,12 @@ class RosNode:
         return_bool = True
 
         return return_bool, return_msg
-    
-    def plot_figure(self):
-        if self.fig is not None:
-            plt.show()
-            self.fig = None
 
 ros_node = RosNode()
 
 while not rospy.is_shutdown():
     try:
         rospy.spin()
-        ros_node.plot_figure()
     except KeyboardInterrupt:
         print("Shutting down")
 
